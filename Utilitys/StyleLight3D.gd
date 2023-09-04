@@ -13,28 +13,32 @@ enum SArray {STATIC, STROBE, FLICKER}
 @export var Style = SArray.STATIC
 
 
-var Stop = false
 
-func _ready():
-	
-	light_energy = Base_Energy
-	
-	StyleFSM(Style)
-
+#	The Styles are all sorted into methods for readability
 
 
 func Static():
 	light_energy = Base_Energy
 
 
+
+
+#	Light effects are made by manipulating node propertys using tweens
+#	instead of using the tweens set_loops() function to make the tweens loop indfinitly
+#	I check to see if Style var has changed, if it hasn't, I use tween_callback to call the method again,
+#	if it has changed, I use the kill function on the tween.
+#	this way if I change the Light Style, the tween will not keep repeating.
+
 func Strobe():
-	var tween = create_tween().set_loops()
+	var tween = create_tween()
 	
 	tween.tween_property(self, "light_energy", light_energy - Strobe_Amount, Wait)
 	tween.tween_property(self, "light_energy", Base_Energy, Wait)
 	
-	if Stop:
+	if not Style == SArray.STROBE:
 		tween.kill()
+	else:
+		tween.tween_callback(Strobe)
 
 
 func Flicker():
@@ -50,10 +54,11 @@ func Flicker():
 	light_energy = Base_Energy - 0.3
 	await create_tween().set_loops().tween_interval(0.1).finished
 	
-	if not Stop:
+	if Style == SArray.FLICKER:
 		Flicker()
 
 
+#	The methods above are called using this method below.
 
 
 func StyleFSM(Set_Style):
@@ -70,4 +75,19 @@ func StyleFSM(Set_Style):
 			Strobe()
 			
 		SArray.FLICKER:
-			Flicker()
+			
+			#tween and rand_range used to create a delay before Flicker method
+			#to desync it from other StyleLights at the start of the scene
+			
+			var FR = randf_range(0.1,1)
+			var tween = create_tween()
+			
+			tween.tween_interval(FR)
+			tween.tween_callback(Flicker)
+
+#	The method StyleFSM is used called once at the start of a scene.
+#	This method can later be called again to change the Style.
+
+func _ready():
+	light_energy = Base_Energy
+	StyleFSM(Style)

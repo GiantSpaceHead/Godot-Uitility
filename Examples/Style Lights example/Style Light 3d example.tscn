@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://boieublx31any"]
+[gd_scene load_steps=8 format=3 uid="uid://boieublx31any"]
 
+[ext_resource type="Script" path="res://Examples/Style Lights example/Style Light 3d example.gd" id="1_4g6gf"]
 [ext_resource type="Script" path="res://Utilitys/StyleLight3D.gd" id="1_6ec7c"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7n1ds"]
@@ -16,6 +17,7 @@ background_energy_multiplier = 0.0
 ambient_light_energy = 0.0
 
 [node name="Style Light 3d example" type="Node3D"]
+script = ExtResource("1_4g6gf")
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -43,7 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 shadow_enabled = true
 script = ExtResource("1_6ec7c")
 Wait = 1.0
-Style = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kov35")
