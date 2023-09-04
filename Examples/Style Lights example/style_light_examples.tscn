@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6graeoif1051"]
+
+[ext_resource type="Texture2D" uid="uid://bd3w5j578of53" path="res://Examples/Style Lights example/CircLight.png" id="1_mv42i"]
+[ext_resource type="Script" path="res://Utilitys/StyleLight2D.gd" id="2_1le41"]
+
+[node name="Style Light examples" type="Node2D"]
+
+[node name="StyleLight2D" type="PointLight2D" parent="."]
+position = Vector2(592, 304)
+texture = ExtResource("1_mv42i")
+texture_scale = 5.0
+script = ExtResource("2_1le41")
+Style = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 0.509804, 0.254902, 1)

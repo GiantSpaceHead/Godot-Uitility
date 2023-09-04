@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://boieublx31any"]
+
+[ext_resource type="Script" path="res://Utilitys/StyleLight3D.gd" id="1_6ec7c"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7n1ds"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_vsje6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ac1a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2fr3v"]
+
+[sub_resource type="Environment" id="Environment_kov35"]
+background_mode = 1
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+
+[node name="Style Light 3d example" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(4.61, 0, 0, 0, 4.61, 0, 0, 0, 4.61, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7n1ds")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01343, 0.496233, -2.4824)
+mesh = SubResource("PrismMesh_vsje6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44745, 0.380851, -0.557692)
+mesh = SubResource("SphereMesh_4ac1a")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50274, 0.487197, -1.59479)
+mesh = SubResource("BoxMesh_2fr3v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.64679, 0.319903, -0.692333, 0, 0.907777, 0.419452, 0.762668, -0.271297, 0.587141, -1.312, 2.375, 1.718)
+
+[node name="StyleLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shadow_enabled = true
+script = ExtResource("1_6ec7c")
+Wait = 1.0
+Style = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kov35")
